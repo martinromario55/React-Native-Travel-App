@@ -36,7 +36,7 @@ const SignUp = () => {
     // Create account with provided email and password
     createAccount(Email, Password).then(() => {
       // Navigate to home screen
-      router.replace('auth/sign-in')
+      router.replace('/myTrip')
     })
   }
   return (

@@ -1,6 +1,8 @@
 import { useFonts } from 'expo-font'
 import { Text, View } from 'react-native'
 import Login from '@/components/Login'
+import { auth } from '@/configs/FirebaseConfig'
+import { Redirect } from 'expo-router'
 
 export default function Index() {
   useFonts({
@@ -8,13 +10,15 @@ export default function Index() {
     'outfit-medium': require('./../assets/fonts/Outfit-Medium.ttf'),
     outfit: require('./../assets/fonts/Outfit-Regular.ttf'),
   })
+
+  const user = auth.currentUser
   return (
     <View
       style={{
         flex: 1,
       }}
     >
-      <Login />
+      {user ? <Redirect href={'/myTrip'} /> : <Login />}
     </View>
   )
 }
