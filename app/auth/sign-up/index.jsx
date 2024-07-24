@@ -2,23 +2,43 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
+import { createAccount } from '../_actions'
 
 const SignUp = () => {
   const navigation = useNavigation()
   const router = useRouter()
+
+  const [Email, setEmail] = useState()
+  const [Password, setPassword] = useState()
+  const [fullName, setFullName] = useState()
 
   useEffect(() => {
     navigation.setOptions({
       headerShown: false,
     })
   }, [])
+
+  const handleSignUp = () => {
+    // Check if all fields are provided
+    if (!Email || !Password || !fullName) {
+      // alert('Please fill in all fields.')
+      ToastAndroid.show('Please enter all details', ToastAndroid.BOTTOM)
+      return
+    }
+    // Create account with provided email and password
+    createAccount(Email, Password).then(() => {
+      // Navigate to home screen
+      router.replace('auth/sign-in')
+    })
+  }
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.back()}>
@@ -29,26 +49,35 @@ const SignUp = () => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Full Name</Text>
-        <TextInput style={styles.input} placeholder="Enter Full Name" />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter Full Name"
+          onChangeText={value => setFullName(value)}
+        />
 
         <Text style={styles.inputLabel}>Email</Text>
-        <TextInput style={styles.input} placeholder="Email address" />
+        <TextInput
+          style={styles.input}
+          placeholder="Email address"
+          onChangeText={value => setEmail(value)}
+        />
 
         <Text style={styles.inputLabel}>Password</Text>
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
+          onChangeText={value => setPassword(value)}
         />
 
-        <Text style={styles.inputLabel}>Confirm Password</Text>
+        {/* <Text style={styles.inputLabel}>Confirm Password</Text>
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
           secureTextEntry
-        />
+        /> */}
 
-        <TouchableOpacity style={styles.btnContainer}>
+        <TouchableOpacity onPress={handleSignUp} style={styles.btnContainer}>
           <Text style={styles.btnText}>Sign Up</Text>
         </TouchableOpacity>
 
