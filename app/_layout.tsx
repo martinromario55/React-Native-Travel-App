@@ -1,9 +1,14 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router'
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" />
+    <Stack
+    // screenOptions={{ headerShown: false }} - Applies to all screens
+    >
+      <Stack.Screen
+        name="index"
+        options={{ headerShown: false }} // Applies to specified screen
+      />
     </Stack>
-  );
+  )
 }

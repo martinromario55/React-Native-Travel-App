@@ -1,5 +1,6 @@
 import { useFonts } from 'expo-font'
 import { Text, View } from 'react-native'
+import Login from '@/components/Login'
 
 export default function Index() {
   useFonts({
@@ -13,9 +14,7 @@ export default function Index() {
         flex: 1,
       }}
     >
-      <Text style={{ fontSize: 30, fontFamily: 'outfit-bold' }}>
-        Hello World!
-      </Text>
+      <Login />
     </View>
   )
 }
