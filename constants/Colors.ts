@@ -14,6 +14,7 @@ export const Colors = {
   error: '#E74C3C',
   WHITE: '#fff',
   BLACK: '#000',
+  GRAY: '#687076',
   light: {
     text: '#11181C',
     background: '#fff',
