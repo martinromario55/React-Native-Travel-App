@@ -2,8 +2,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { Colors } from '@/constants/Colors'
+import { useRouter } from 'expo-router'
 
 const NewTripCard = () => {
+  const router = useRouter()
+
   return (
     <View style={styles.container}>
       <Ionicons name="location-sharp" size={30} color="black" />
@@ -12,7 +15,10 @@ const NewTripCard = () => {
         Looks like it's time to plan a new travel experience! Get started below.
       </Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push('create-trip/search-place')}
+      >
         <Text style={styles.buttonText}>Start New Trip</Text>
       </TouchableOpacity>
     </View>
